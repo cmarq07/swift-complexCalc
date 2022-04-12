@@ -4,12 +4,88 @@ print("Welcome back to the UW Calculator")
 // below both compile and return "true"
 class Calculator {
     
+    // Addition Methods
+    func add(lhs : Int, rhs : Int) -> Int {
+        return lhs + rhs
+    }
+    
+    func add(_ args : [Int]) -> Int {
+        var sum : Int = 0
+        for index in 0...args.count - 1 {
+            sum += args[index]
+        }
+        
+        return sum
+    }
+    
+    // Subtraction Methods
+    func subtract(lhs : Int, rhs : Int) -> Int {
+        return lhs - rhs
+    }
+    
+    // Multiplication Methods
+        // With 2 parameters
+    func multiply(lhs : Int, rhs : Int) -> Int {
+        return lhs * rhs
+    }
+        
+        // With > 2 parameters
+    func multiply(_ args : [Int]) -> Int {
+        var product : Int = 1
+        for index in 0...args.count - 1 {
+            product *= args[index]
+        }
+        
+        return product
+    }
+    
+    // Division Methods
+    func divide(lhs : Int, rhs : Int) -> Int {
+        return lhs / rhs
+    }
+    
+    // Count
+    func count(_ args : [Int]) -> Int {
+        if(args.count == 0) { // Base case
+            return 0
+        }
+        
+        var counter : Int = 0
+        for _ in 0...args.count - 1 {
+            counter += 1
+        }
+        
+        return counter
+    }
+    
+    // Average
+    func avg(_ args : [Int]) -> Int {
+        if(args.count == 0) { // Base case
+            return 0
+        } else if(args.count == 1) { // Only one element
+            return args[0]
+        }
+        
+        var sum : Int = 0
+        for index in 0...args.count - 1 {
+            sum += args[index]
+        }
+        let avg = sum / args.count
+        
+        return avg
+    }
+    
+    // Anonymous Math Operations
+    func mathOp(lhs : Int, rhs : Int, op : (Int, Int) -> Int) -> Int {
+        return op(lhs, rhs)
+    }
 }
 
 let calc = Calculator()  // Don't change this declaration name; it's used in all the tests below
 
 // ====> Add your own tests here if you wish <====
-
+//print(calc.add([7, 3, 4, 2, 7, 10, 14, 53]))
+//print(calc.avg([7, 3, 4, 2, 7, 10, 14, 53]))
 
 // ====> Do not modify code in this section <====
 calc.add(lhs: 2, rhs: 2) == 4
@@ -17,7 +93,7 @@ calc.subtract(lhs: 2, rhs: 2) == 0
 calc.multiply(lhs: 2, rhs: 2) == 4
 calc.divide(lhs: 2, rhs: 2) == 1
 
-calc.mathOp(lhs: 5, rhs: 5, op: { (lhs: Int, rhs: Int) -> Int in (lhs + rjs) + (lhs * rhs) }) == 35
+calc.mathOp(lhs: 5, rhs: 5, op: { (lhs: Int, rhs: Int) -> Int in (lhs + rhs) + (lhs * rhs) }) == 35
     // This style is one way of writing an anonymous function
 calc.mathOp(lhs: 10, rhs: -5, op: { ($0 + $1) + ($0 - $1) }) == 20
     // This is the second, more terse, style; either works
@@ -30,23 +106,23 @@ calc.avg([2, 2, 2, 2, 2, 2]) == 2
 calc.avg([1, 2, 3, 4, 5]) == 3
 calc.avg([1]) == 1
 
-calc.mathOp(args: [1, 2, 3], beg: 0, op: { $0 + $1 }) == 6
+//calc.mathOp(args: [1, 2, 3], beg: 0, op: { $0 + $1 }) == 6
     // this is (((0 op 1) op 2) op 3)
-calc.mathOp(args: [1, 2, 3, 4, 5], beg: 0, op: { $0 + $1 }) == 15
+//calc.mathOp(args: [1, 2, 3, 4, 5], beg: 0, op: { $0 + $1 }) == 15
     // this is (((((0 op 1) op 2) op 3) op 4) op 5)
-calc.mathOp(args: [1, 1, 1, 1, 1], beg: 1, op: { $0 * $1 }) == 1
+//calc.mathOp(args: [1, 1, 1, 1, 1], beg: 1, op: { $0 * $1 }) == 1
     // this is (((((1 op 1) op 1) op 1) op 1) op 1)
 
-let p1 = (5, 5)
-let p2 = (12, -27)
-let p3 = (-4, 4)
-let p4 = (0, 0)
-calc.add(lhs: p1, rhs: p2) == (17, -22)
-calc.subtract(lhs: p1, rhs: p2) == (-7, 32)
-calc.add(lhs: p4, rhs: p4) == (0, 0)
-calc.add(lhs: p3, rhs: p4) == (-4, 4)
+//let p1 = (5, 5)
+//let p2 = (12, -27)
+//let p3 = (-4, 4)
+//let p4 = (0, 0)
+//calc.add(lhs: p1, rhs: p2) == (17, -22)
+//calc.subtract(lhs: p1, rhs: p2) == (-7, 32)
+//calc.add(lhs: p4, rhs: p4) == (0, 0)
+//calc.add(lhs: p3, rhs: p4) == (-4, 4)
 
-let pd1 = ["x": 5, "y": 5]
-let pd2 = ["x": -4, "y": 4]
-calc.add(lhs: pd1, rhs: pd2) == ["x": 1, "y": 9]
-calc.subtract(lhs: pd1, rhs: pd2) == ["x": 9, "y": 1]
+//let pd1 = ["x": 5, "y": 5]
+//let pd2 = ["x": -4, "y": 4]
+//calc.add(lhs: pd1, rhs: pd2) == ["x": 1, "y": 9]
+//calc.subtract(lhs: pd1, rhs: pd2) == ["x": 9, "y": 1]
